@@ -1,88 +1,88 @@
-# Deploy Guide — chrome-extens
+# 部署指南 — chrome-extens
 
-## Overview
+## 概述
 
-Deploy the `chrome-extens/` static site to the production server.
+将 `chrome-extens/` 静态站点部署到生产服务器。
 
-- **Server**: 8.146.205.102
-- **Target path**: `/usr/ydj/chrome-extens-html/`
-- **Domain**: https://extension.nextself.top
-- **Nginx**: reverse proxy + static file serving (SSL via Let's Encrypt)
+- **服务器**：8.146.205.102
+- **目标路径**：`/usr/ydj/chrome-extens-html/`
+- **域名**：https://extension.nextself.top
+- **Nginx**：反向代理 + 静态文件服务（SSL 通过 Let's Encrypt）
 
-## One-Click Deploy
+## 一键部署
 
 ```bash
 python3 deploy.py
 ```
 
-This syncs changed files from `chrome-extens/` to the server and reloads Nginx. Unchanged files are skipped.
+自动同步 `chrome-extens/` 中变更的文件到服务器，并重载 Nginx。未变更的文件自动跳过。
 
-## Prerequisites
+## 环境要求
 
-- Python 3 with `paramiko` (`pip install paramiko`)
-- SSH key configured (done once, see below)
+- Python 3 + `paramiko` 库（`pip install paramiko`）
+- 已配置 SSH 密钥（首次配置一次即可，见下方）
 
-## Initial Server Setup
+## 首次配置
 
-Run these steps **once** when setting up a new machine:
+在新机器上**只需执行一次**的初始化步骤：
 
-### 1. Generate SSH Key
+### 1. 生成 SSH 密钥
 
 ```bash
 ssh-keygen -t ed25519 -C "github-key"
 ```
 
-### 2. Add Public Key to Server
+### 2. 将公钥添加到服务器
 
 ```bash
-# On first connection, use password to deploy the key
+# 首次连接使用密码部署密钥
 ssh-copy-id root@8.146.205.102
-# Or manually:
+# 或手动添加：
 cat ~/.ssh/id_ed25519.pub | ssh root@8.146.205.102 "mkdir -p ~/.ssh && cat >> ~/.ssh/authorized_keys"
 ```
 
-### 3. Verify Connection
+### 3. 验证连接
 
 ```bash
 ssh root@8.146.205.102 "ls /usr/ydj/chrome-extens-html/"
 ```
 
-## Multi-Machine Workflow
+## 多机协作流程
 
 ```
-Laptop A (Trae)
-  ├── python3 deploy.py    →  Push to server
-  └── git push              →  Push to GitHub
+笔记本A (Trae)
+  ├── python3 deploy.py    →  部署到服务器
+  └── git push              →  推送到 GitHub
                                  |
                             GitHub
                                  |
                             git pull
                                  |
-                            Laptop B (Trae)  →  python3 deploy.py
+                            笔记本B (Trae)  →  python3 deploy.py
 ```
 
-- **Each machine**: Run `deploy.py` to push local changes to the server
-- **Sync between machines**: Use `git push` / `git pull` via GitHub
+- **每台机器**：执行 `python3 deploy.py` 将本地修改部署到服务器
+- **机器间同步**：通过 GitHub 使用 `git push` / `git pull` 同步代码
 
-## File Structure
+## 文件结构
 
 ```
-chrome-extens/         ← Static site content (what gets deployed)
+chrome-extens/         ← 静态站点内容（部署的目标目录）
   ├── index.html
   ├── css/
   ├── js/
   ├── assets/
   └── docs/
-deploy.py              ← Deploy script
-file-server.conf       ← Nginx configuration (reference)
+deploy.py              ← 部署脚本
+file-server.conf       ← Nginx 配置（参考）
 ```
 
-## Server Details
+## 服务器信息
 
-| Item | Value |
-|------|-------|
-| IP | `8.146.205.102` |
-| User | `root` |
-| Web root | `/usr/ydj/chrome-extens-html/` |
-| Domain | `extension.nextself.top` |
-| Nginx config | `/etc/nginx/nginx.conf` |
+| 项目 | 值 |
+|------|-----|
+| IP 地址 | `8.146.205.102` |
+| 登录用户 | `root` |
+| 网站根目录 | `/usr/ydj/chrome-extens-html/` |
+| 域名 | `extension.nextself.top` |
+| Nginx 配置 | `/etc/nginx/nginx.conf` |
