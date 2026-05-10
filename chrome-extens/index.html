@@ -1,0 +1,315 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>AI Prompt Workspace — Save & paste prompts by right‑click</title>
+    <meta name="description" content="Right‑click to save prompts. AI auto tags and categorizes. Right‑click to paste recent or pinned prompts into any input." />
+    <link rel="icon" href="./assets/icons/logo.svg" type="image/svg+xml" />
+    <link rel="stylesheet" href="./css/style.css" />
+    <script defer src="./js/main.js"></script>
+  </head>
+  <body data-page="index">
+    <a class="skip" href="#main" data-i18n="common.skip">Skip to content</a>
+
+    <header class="topbar">
+      <div class="container">
+        <nav class="nav" aria-label="主导航">
+          <a class="brand" href="./index.html">
+            <img class="brandMark" src="./assets/icons/logo.svg" alt="AI Prompt Workspace" />
+            <span class="brandText">
+              <span class="brandName">AI Prompt Workspace</span>
+              <span class="brandTag" data-i18n="common.brandTag">Right‑click prompt library</span>
+            </span>
+          </a>
+
+          <div class="navLinks" role="navigation" aria-label="顶部菜单">
+            <a href="#features" aria-current="page" data-i18n="common.nav.features">Features</a>
+            <a href="./pricing.html" data-i18n="common.nav.pricing">Pricing</a>
+            <a href="./docs/install.html" data-i18n="common.nav.docs">Docs</a>
+            <a href="./privacy.html" data-i18n="common.nav.privacy">Privacy</a>
+            <a href="https://chromewebstore.google.com/detail/your-extension-id" target="_blank" rel="noreferrer" data-i18n="common.nav.install">Install</a>
+          </div>
+
+          <div class="navRight">
+            <button class="btn small" type="button" data-lang-toggle>中文</button>
+            <a class="btn small ghost" href="./pricing.html" data-i18n="common.nav.ctaPricing">See pricing</a>
+            <a class="btn primary" href="https://chromewebstore.google.com/detail/your-extension-id" target="_blank" rel="noreferrer" data-i18n="common.nav.ctaInstall">Install Extension</a>
+            <button class="burger" type="button" aria-label="Open menu" aria-expanded="false" data-burger>
+              <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path d="M4 7H20" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+                <path d="M4 12H20" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+                <path d="M4 17H20" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+              </svg>
+            </button>
+          </div>
+        </nav>
+
+        <div class="mobileMenu" data-mobile-menu>
+          <a href="#features"><span data-i18n="common.nav.features">Features</span> <span>→</span></a>
+          <a href="./pricing.html"><span data-i18n="common.nav.pricing">Pricing</span> <span>→</span></a>
+          <a href="./docs/install.html"><span data-i18n="common.nav.docs">Docs</span> <span>→</span></a>
+          <a href="./privacy.html"><span data-i18n="common.nav.privacy">Privacy</span> <span>→</span></a>
+          <a href="https://chromewebstore.google.com/detail/your-extension-id" target="_blank" rel="noreferrer"><span data-i18n="common.nav.install">Install</span> <span>↗</span></a>
+          <div class="ctaRow">
+            <button class="btn small" type="button" data-lang-toggle>中文</button>
+            <a class="btn small" href="./pricing.html" data-i18n="common.nav.ctaPricing">See pricing</a>
+            <a class="btn small primary" href="https://chromewebstore.google.com/detail/your-extension-id" target="_blank" rel="noreferrer" data-i18n="common.nav.install">Install</a>
+          </div>
+        </div>
+      </div>
+    </header>
+
+    <main id="main">
+      <section class="hero">
+        <div class="container heroGrid">
+          <div>
+            <span class="badge"><span class="badgeDot" aria-hidden="true"></span><span data-i18n="index.hero.badge">Right‑click save · AI auto tag · Right‑click paste</span></span>
+            <h1>AI Prompt Workspace</h1>
+            <p class="subhead" data-i18n="index.hero.subhead">Save prompts instantly from your browser. AI automatically categorizes and tags them. When you need them, right‑click to paste recent or pinned prompts anywhere.</p>
+            <div class="heroCtas">
+              <a class="btn primary" href="https://chromewebstore.google.com/detail/your-extension-id" target="_blank" rel="noreferrer" data-i18n="index.hero.ctaInstall">Install Extension</a>
+              <a class="btn" href="#features" data-i18n="index.hero.ctaFeatures">See features</a>
+            </div>
+            <div class="heroNote" data-i18n="index.hero.note">Core: Right‑click save · AI auto tag · Recent &amp; Pinned · Right‑click paste</div>
+          </div>
+
+          <aside class="heroCard" aria-label="价值点概览">
+            <h3><span data-lang="en">From “one‑off” to reusable</span><span data-lang="zh">从「写一次」到「可复用」</span></h3>
+            <ul>
+              <li class="kpi">
+                <div>
+                  <b data-i18n="index.hero.kpi1t">Save from right‑click</b>
+                  <span data-i18n="index.hero.kpi1d">Highlight text or use the page context menu to save prompts in seconds.</span>
+                </div>
+                <span class="chip"><i></i>Library</span>
+              </li>
+              <li class="kpi">
+                <div>
+                  <b data-i18n="index.hero.kpi2t">AI auto categorize &amp; tag</b>
+                  <span data-i18n="index.hero.kpi2d">No manual organization. AI keeps your library clean and searchable.</span>
+                </div>
+                <span class="chip"><i></i>Auto Tag</span>
+              </li>
+              <li class="kpi">
+                <div>
+                  <b data-i18n="index.hero.kpi3t">Right‑click paste</b>
+                  <span data-i18n="index.hero.kpi3d">Paste recent or pinned prompts directly into the current input box.</span>
+                </div>
+                <span class="chip"><i></i>Insert</span>
+              </li>
+            </ul>
+          </aside>
+        </div>
+      </section>
+
+      <section class="section">
+        <div class="container">
+          <div class="sectionHeader">
+            <h2 data-i18n="index.pain.title">Where are your prompts today?</h2>
+            <p data-i18n="index.pain.desc">Prompts scattered across chats and notes cost you time every day.</p>
+          </div>
+          <div class="grid3">
+            <div class="card">
+              <h3 data-i18n="index.pain.c1t">Scattered</h3>
+              <p data-i18n="index.pain.c1d">Chat apps, docs, notes — multiple versions everywhere.</p>
+            </div>
+            <div class="card">
+              <h3 data-i18n="index.pain.c2t">Hard to find</h3>
+              <p data-i18n="index.pain.c2d">When you need it, you can’t find the right one fast enough.</p>
+            </div>
+            <div class="card">
+              <h3 data-i18n="index.pain.c3t">Hard to reuse</h3>
+              <p data-i18n="index.pain.c3d">Copy‑paste and re‑edit over and over. Nothing compounds.</p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section class="section" id="features">
+        <div class="container">
+          <div class="sectionHeader">
+            <h2 data-i18n="index.features.title">Key features</h2>
+            <p data-i18n="index.features.desc">Built around a simple loop: save → auto organize → paste.</p>
+          </div>
+          <div class="grid3">
+            <div class="card">
+              <h3 data-i18n="index.features.f1t">Right‑click Save</h3>
+              <p data-i18n="index.features.f1d">Save selected text or a prepared prompt from the browser context menu.</p>
+            </div>
+            <div class="card">
+              <h3 data-i18n="index.features.f2t">AI Tagging</h3>
+              <p data-i18n="index.features.f2d">AI adds tags and categories automatically so you don’t have to.</p>
+            </div>
+            <div class="card">
+              <h3 data-i18n="index.features.f3t">Recent &amp; Pinned</h3>
+              <p data-i18n="index.features.f3d">Keep a short list for daily use and pin your must‑have prompts.</p>
+            </div>
+            <div class="card">
+              <h3 data-i18n="index.features.f4t">Right‑click Paste</h3>
+              <p data-i18n="index.features.f4d">Paste directly into the current input — faster than switching tabs.</p>
+            </div>
+            <div class="card">
+              <h3 data-i18n="index.features.f5t">Search &amp; Filter</h3>
+              <p data-i18n="index.features.f5d">Quickly find prompts by tags, categories, and keywords.</p>
+            </div>
+            <div class="card">
+              <h3 data-i18n="index.features.f6t">Works anywhere</h3>
+              <p data-i18n="index.features.f6d">Use it across common AI chat sites and web apps (as supported).</p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section class="section" id="workflow">
+        <div class="container">
+          <div class="sectionHeader">
+            <h2 data-i18n="index.flow.title">How it works</h2>
+            <p data-i18n="index.flow.desc">A frictionless prompt workflow inside your browser.</p>
+          </div>
+          <div class="flow">
+            <div class="step">
+              <span class="stepNum">1</span>
+              <h3 data-i18n="index.flow.s1t">Right‑click save</h3>
+              <p data-i18n="index.flow.s1d">Save from any page or selection without leaving your work.</p>
+            </div>
+            <div class="step">
+              <span class="stepNum">2</span>
+              <h3 data-i18n="index.flow.s2t">AI organizes</h3>
+              <p data-i18n="index.flow.s2d">Automatic categories and tags keep your library tidy.</p>
+            </div>
+            <div class="step">
+              <span class="stepNum">3</span>
+              <h3 data-i18n="index.flow.s3t">Pick recent or pinned</h3>
+              <p data-i18n="index.flow.s3d">From the context menu, choose what you want to use right now.</p>
+            </div>
+            <div class="step">
+              <span class="stepNum">4</span>
+              <h3 data-i18n="index.flow.s4t">Paste into input</h3>
+              <p data-i18n="index.flow.s4d">Insert the prompt where you’re typing and continue immediately.</p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section class="section" id="screenshots">
+        <div class="container">
+          <div class="sectionHeader">
+            <h2 data-i18n="index.shots.title">Live product demo</h2>
+            <p data-i18n="index.shots.desc">Real screenshots and GIF demos from the actual workflow.</p>
+          </div>
+          <div class="shots">
+            <div class="shot">
+              <img src="./assets/images/英文版管理后台png.png" alt="English admin dashboard" data-lang="en" />
+              <img src="./assets/images/中文管理后台.png" alt="中文管理后台" data-lang="zh" />
+              <div class="shotBody">
+                <div class="phTitle"><span data-i18n="index.shots.a">Admin dashboard</span><span class="chip"><i></i>Dashboard</span></div>
+                <p>
+                  <span data-lang="en">The management view shows saved prompts, categories, tags, and actions such as edit, add to menu, or delete.</span>
+                  <span data-lang="zh">管理后台集中展示已保存 Prompt、分类、标签，以及编辑、加入右键菜单、删除等操作。</span>
+                </p>
+              </div>
+            </div>
+            <div class="shot">
+              <img src="./assets/images/英文版保存.gif" alt="Save prompt in English interface" data-lang="en" />
+              <img src="./assets/images/中文版保存.gif" alt="中文界面保存 Prompt 动画" data-lang="zh" />
+              <div class="shotBody">
+                <div class="phTitle"><span data-i18n="index.shots.b">Save prompt by right‑click</span><span class="chip"><i></i>Save</span></div>
+                <p>
+                  <span data-lang="en">Users can save a prompt directly from the current page, then let AI organize it into the right category and tags.</span>
+                  <span data-lang="zh">用户可以直接在当前页面右键保存 Prompt，随后由 AI 自动归类并补全标签。</span>
+                </p>
+              </div>
+            </div>
+            <div class="shot">
+              <img src="./assets/images/英文提示词复制和右键呼出.gif" alt="Open context menu and copy prompt in English" data-lang="en" />
+              <img src="./assets/images/中文提示词复制和右键呼出.gif" alt="中文界面右键呼出并复制 Prompt" data-lang="zh" />
+              <div class="shotBody">
+                <div class="phTitle"><span data-i18n="index.shots.c">Open and copy from context menu</span><span class="chip"><i></i>Right Click</span></div>
+                <p>
+                  <span data-lang="en">When writing in tools like Gemini, users can right‑click to open the prompt menu and quickly copy or insert a saved prompt.</span>
+                  <span data-lang="zh">在 Gemini 等工具里输入时，用户可以右键呼出 Prompt 菜单，快速复制或插入已保存提示词。</span>
+                </p>
+              </div>
+            </div>
+            <div class="shot">
+              <img src="./assets/images/删除动画.gif" alt="Delete prompt demo" />
+              <div class="shotBody">
+                <div class="phTitle"><span data-i18n="index.shots.d">Delete and keep the library clean</span><span class="chip"><i></i>Manage</span></div>
+                <p>
+                  <span data-lang="en">Prompt assets are easy to maintain. Users can delete outdated entries and keep the library focused on what still works.</span>
+                  <span data-lang="zh">Prompt 资产可以持续维护。用户能删除过时条目，让提示词库始终保持干净、可复用。</span>
+                </p>
+              </div>
+            </div>
+          </div>
+          <div style="margin-top:12px" class="notice"><span data-i18n="index.shots.note">All media below comes from real captures placed in ./assets/images/.</span> <span class="chip"><i></i>./assets/images/</span></div>
+        </div>
+      </section>
+
+      <section class="section" id="faq">
+        <div class="container">
+          <div class="sectionHeader">
+            <h2 data-i18n="index.faq.title">FAQ</h2>
+            <p data-i18n="index.faq.desc">Pricing, language, data, and compatibility — answered.</p>
+          </div>
+          <div class="faq">
+            <details class="qa">
+              <summary><span data-i18n="index.faq.q1">How much does it cost?</span><span>Pricing</span></summary>
+              <div class="ans"><span data-i18n="index.faq.a1">Quarterly: $9.9. Yearly: $36. Details on the pricing page.</span> <a href="./pricing.html" data-i18n="common.nav.pricing">Pricing</a></div>
+            </details>
+            <details class="qa">
+              <summary><span data-i18n="index.faq.q2">Is it bilingual (EN/中文)?</span><span>Language</span></summary>
+              <div class="ans" data-i18n="index.faq.a2">Yes. You can switch between English and Chinese in the top bar. Default is English.</div>
+            </details>
+            <details class="qa">
+              <summary><span data-i18n="index.faq.q3">Does it support my AI site?</span><span>Compatibility</span></summary>
+              <div class="ans" data-i18n="index.faq.a3">The goal is to work wherever you type. Compatibility depends on the site and is continuously improved.</div>
+            </details>
+            <details class="qa">
+              <summary><span data-i18n="index.faq.q4">Is my data stored locally?</span><span>Privacy</span></summary>
+              <div class="ans"><span data-i18n="index.faq.a4">By default, prompts are stored locally in your browser. See the privacy policy for details.</span> <a href="./privacy.html" data-i18n="common.nav.privacy">Privacy</a></div>
+            </details>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <footer class="footer">
+      <div class="container">
+        <div class="footerGrid">
+          <div>
+            <a class="brand" href="./index.html">
+              <img class="brandMark" src="./assets/icons/logo.svg" alt="AI Prompt Workspace" />
+              <span class="brandText">
+                <span class="brandName">AI Prompt Workspace</span>
+                <span class="brandTag" data-i18n="common.brandTag">Right‑click prompt library</span>
+              </span>
+            </a>
+            <p data-i18n="index.desc">Right‑click to save prompts. AI auto tags and categorizes. Right‑click to paste recent or pinned prompts into any input.</p>
+          </div>
+          <div>
+            <h4 data-i18n="common.footer.product">Product</h4>
+            <a href="#features" data-i18n="common.nav.features">Features</a>
+            <a href="./pricing.html" data-i18n="common.nav.pricing">Pricing</a>
+            <a href="./docs/install.html" data-i18n="common.nav.docs">Docs</a>
+            <a href="https://chromewebstore.google.com/detail/your-extension-id" target="_blank" rel="noreferrer" data-i18n="common.nav.install">Install</a>
+          </div>
+          <div>
+            <h4 data-i18n="common.footer.legal">Legal</h4>
+            <a href="./terms.html">Terms</a>
+            <a href="./privacy.html">Privacy</a>
+            <a href="./refund.html">Refund</a>
+            <a href="mailto:support@yourdomain.com" data-i18n="common.footer.contact">Contact</a>
+          </div>
+        </div>
+        <div class="fineprint">
+          <span>© <span id="y"></span> AI Prompt Workspace</span>
+        </div>
+      </div>
+      <script>
+        document.getElementById('y').textContent = String(new Date().getFullYear());
+      </script>
+    </footer>
+  </body>
+</html>
