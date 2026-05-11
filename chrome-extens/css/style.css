@@ -134,6 +134,11 @@ img{max-width:100%;height:auto;display:block}
 }
 .btn:hover{background:rgba(255,255,255,.06)}
 .btn:active{transform:translateY(1px)}
+.btn:disabled{
+  opacity:.65;
+  cursor:not-allowed;
+}
+.btn.is-loading{position:relative}
 .btn.primary{
   background:linear-gradient(135deg, rgba(124,92,255,.95), rgba(24,200,255,.85));
   border-color:rgba(255,255,255,.15);
@@ -626,6 +631,11 @@ td.muted{color:var(--muted)}
   color:var(--muted);
   font-size:14px;
   line-height:1.65;
+}
+.notice.is-error{
+  color:#ffb8b8;
+  border-color:rgba(255,107,107,.45);
+  background:rgba(255,107,107,.08);
 }
 
 @media (max-width: 980px){

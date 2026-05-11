@@ -8,7 +8,20 @@
     <link rel="icon" href="./assets/icons/logo.svg" type="image/svg+xml" />
     <link rel="stylesheet" href="./css/style.css" />
     <script src="https://cdn.paddle.com/paddle/v2/paddle.js"></script>
+    <script>
+      window.PADDLE_CONFIG = {
+        // "sandbox" for testing, "live" for production
+        environment: "sandbox",
+        // Use client-side token only. Do NOT put API key in frontend code.
+        clientToken: "test_2440efbe7e65215abfa6354c3c8",
+        prices: {
+          quarterly: "pri_01kr97zsc2etbje4mrdds745v0",
+          yearly: "pri_01kr983a50e5gxymsbms25hs0y"
+        }
+      };
+    </script>
     <script defer src="./js/main.js"></script>
+    <script defer src="./js/billing.js"></script>
   </head>
   <body data-page="pricing">
     <a class="skip" href="#main" data-i18n="common.skip">Skip to content</a>
@@ -87,7 +100,10 @@
                 <li><svg class="tick" viewBox="0 0 24 24" fill="none"><path d="M20 6L9 17l-5-5" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg><span data-i18n="pricing.item4">Bilingual (EN/中文)</span></li>
               </ul>
               <div style="margin-top:16px">
-                <button class="btn" type="button" data-pay-cycle="quarterly" data-i18n="pricing.payQuarter">Subscribe Quarterly</button>
+                <button class="btn" type="button" data-paddle-checkout="quarterly">
+                  <span data-lang="en">Subscribe Quarterly</span>
+                  <span data-lang="zh">订阅季度版</span>
+                </button>
               </div>
             </div>
 
@@ -106,11 +122,15 @@
                 <li><svg class="tick" viewBox="0 0 24 24" fill="none"><path d="M20 6L9 17l-5-5" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg><span data-i18n="pricing.item4">Bilingual (EN/中文)</span></li>
               </ul>
               <div style="margin-top:16px">
-                <button class="btn primary" type="button" data-pay-cycle="yearly" data-i18n="pricing.payYear">Subscribe Yearly</button>
+                <button class="btn primary" type="button" data-paddle-checkout="yearly">
+                  <span data-lang="en">Subscribe Yearly</span>
+                  <span data-lang="zh">订阅年度版</span>
+                </button>
               </div>
             </div>
           </div>
           <div style="margin-top:12px" class="notice" data-i18n="pricing.note">Prices are in USD. Billing handled by your payment provider.</div>
+          <div style="margin-top:10px" class="notice" data-billing-status hidden aria-live="polite"></div>
         </div>
       </section>
     </main>

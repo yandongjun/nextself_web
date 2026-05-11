@@ -124,6 +124,115 @@ npx serve -l 5173
 - 中文模式展示中文素材
 - 通用素材在两种模式下都展示
 
+## 支付接入（Paddle）
+
+当前已在 `pricing.html` 接入 Paddle.js，并绑定两个套餐按钮：
+
+- `quarterly`（季度）
+- `yearly`（年度）
+
+实现文件：
+
+- `pricing.html`（引入 Paddle.js + 配置对象 + 订阅按钮）
+- `js/billing.js`（初始化 Paddle 并拉起 Checkout）
+
+### 你需要配置的参数
+
+在 `pricing.html` 里找到：
+
+```js
+window.PADDLE_CONFIG = {
+  environment: "sandbox",
+  clientToken: "",
+  prices: {
+    quarterly: "",
+    yearly: ""
+  }
+};
+```
+
+需要你提供并填入：
+
+- `clientToken`
+  - Paddle 前端 Token（测试环境通常以 `test_` 开头）
+- `prices.quarterly`
+  - 季度套餐对应的 Paddle `priceId`（通常形如 `pri_...`）
+- `prices.yearly`
+  - 年度套餐对应的 Paddle `priceId`
+
+### 切到生产环境
+
+测试完成后将：
+
+- `environment: "sandbox"` 改为 `environment: "live"`
+- 同时替换为生产 `clientToken` 与生产 `priceId`
+
+### 说明
+
+- 当前实现为前端拉起 Checkout（overlay 模式）
+- 前端接入只能完成“发起支付”
+- 如果你要做“开通会员/权限变更/订单校验”，还需要服务端 Webhook
+
+## 对接支付还需要你提供什么
+
+为完成完整收费闭环（不仅仅是打开支付窗），建议你再提供：
+
+- Paddle 商户后台中的正式产品与价格配置
+- Webhook 接收地址（后端 API）
+- 业务侧用户标识方案（例如 userId/email）
+- 支付成功后跳转页面（如 `/docs/install.html` 或 `/success.html`）
+- 取消支付跳转页面（如 `/pricing.html`）
+
+如果你需要，我可以下一步继续帮你：
+
+- 增加 `success.html` / `cancel.html`
+- 在 Checkout 里补充成功与取消跳转参数
+- 设计一版后端 Webhook 验签与订阅状态落库的接口规范
+
+## 当前支付联调状态
+
+已完成：
+
+- 前端接入 Paddle.js（`pricing.html` + `js/billing.js`）
+- 按钮可拉起沙箱 Checkout（季度/年度各自 `priceId`）
+- 支付流程页：
+  - `success.html`（支付成功回跳）
+  - `cancel.html`（取消支付回跳）
+- 定价页增加支付状态提示与按钮 loading 态
+
+## Webhook 对接清单（后端必做）
+
+前端拉起支付只代表“可支付”，要真正开通会员，后端必须接 Paddle Webhook：
+
+- 新建后端接口：`POST /api/paddle/webhook`
+- 校验 Paddle 签名（拒绝未验签请求）
+- 幂等处理事件（按事件 ID 去重，避免重复开通）
+- 记录原始事件与处理结果（便于审计与排错）
+
+建议至少处理的事件：
+
+- `transaction.completed`
+- `subscription.created`
+- `subscription.updated`
+- `subscription.canceled`
+- `subscription.past_due`
+
+建议落库字段：
+
+- `user_id`（你系统内用户）
+- `paddle_customer_id`
+- `subscription_id`
+- `price_id`
+- `status`（active/canceled/past_due...）
+- `current_period_end`
+- `updated_at`
+
+联调验收标准：
+
+- 沙箱完成支付后，用户状态在后端变为已开通
+- 取消/过期事件能正确回写用户权限
+- 重放同一 webhook 事件不会重复发放权益
+
 ## 路径规范
 
 本项目为了兼容 GitHub Pages 子路径部署，资源路径统一使用相对路径：
