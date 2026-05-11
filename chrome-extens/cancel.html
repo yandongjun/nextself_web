@@ -1,0 +1,81 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Checkout Cancelled — AI Prompt Workspace</title>
+    <meta name="description" content="Checkout was cancelled. You can retry anytime." />
+    <link rel="icon" href="./assets/icons/logo.svg" type="image/svg+xml" />
+    <link rel="stylesheet" href="./css/style.css" />
+    <script defer src="./js/main.js"></script>
+  </head>
+  <body>
+    <a class="skip" href="#main" data-i18n="common.skip">Skip to content</a>
+
+    <header class="topbar">
+      <div class="container">
+        <nav class="nav" aria-label="主导航">
+          <a class="brand" href="./index.html">
+            <img class="brandMark" src="./assets/icons/logo.svg" alt="AI Prompt Workspace" />
+            <span class="brandText">
+              <span class="brandName">AI Prompt Workspace</span>
+              <span class="brandTag" data-i18n="common.brandTag">Right‑click prompt library</span>
+            </span>
+          </a>
+          <div class="navLinks" role="navigation" aria-label="顶部菜单">
+            <a href="./index.html#features" data-i18n="common.nav.features">Features</a>
+            <a href="./pricing.html" data-i18n="common.nav.pricing">Pricing</a>
+            <a href="./docs/install.html" data-i18n="common.nav.docs">Docs</a>
+            <a href="./privacy.html" data-i18n="common.nav.privacy">Privacy</a>
+          </div>
+          <div class="navRight">
+            <button class="btn small" type="button" data-lang-toggle>中文</button>
+            <a class="btn" href="./pricing.html">
+              <span data-lang="en">Try Again</span>
+              <span data-lang="zh">重新支付</span>
+            </a>
+          </div>
+        </nav>
+      </div>
+    </header>
+
+    <main id="main">
+      <section class="pageHeader">
+        <div class="container">
+          <span class="badge"><span class="badgeDot" aria-hidden="true"></span><span data-lang="en">Checkout closed</span><span data-lang="zh">支付已取消</span></span>
+          <h1>
+            <span data-lang="en">No worries, your payment was not completed.</span>
+            <span data-lang="zh">不用担心，本次支付没有完成扣款。</span>
+          </h1>
+          <p class="subhead">
+            <span data-lang="en">You can go back to pricing and retry at any time.</span>
+            <span data-lang="zh">你可以随时返回定价页重新发起支付。</span>
+          </p>
+        </div>
+      </section>
+
+      <section class="section" style="padding-top: 8px">
+        <div class="container">
+          <div class="notice">
+            <strong data-lang="en">Need help?</strong>
+            <strong data-lang="zh">需要帮助？</strong>
+            <div style="margin-top: 10px">
+              <span data-lang="en">If checkout keeps failing, contact support and include your browser and screenshot.</span>
+              <span data-lang="zh">如果多次支付失败，请联系支持并附上浏览器信息和截图。</span>
+            </div>
+            <div style="margin-top: 14px; display: flex; gap: 10px; flex-wrap: wrap">
+              <a class="btn primary" href="./pricing.html">
+                <span data-lang="en">Back to Pricing</span>
+                <span data-lang="zh">返回定价页</span>
+              </a>
+              <a class="btn" href="mailto:support@yourdomain.com">
+                <span data-lang="en">Contact Support</span>
+                <span data-lang="zh">联系支持</span>
+              </a>
+            </div>
+          </div>
+        </div>
+      </section>
+    </main>
+  </body>
+</html>
