@@ -7,6 +7,7 @@
     <meta name="description" content="Quarterly $9.9 or yearly $36. Simple pricing for right‑click prompt workflows." />
     <link rel="icon" href="./assets/icons/logo.svg" type="image/svg+xml" />
     <link rel="stylesheet" href="./css/style.css" />
+    <script src="https://cdn.paddle.com/paddle/v2/paddle.js"></script>
     <script defer src="./js/main.js"></script>
   </head>
   <body data-page="pricing">
@@ -86,7 +87,7 @@
                 <li><svg class="tick" viewBox="0 0 24 24" fill="none"><path d="M20 6L9 17l-5-5" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg><span data-i18n="pricing.item4">Bilingual (EN/中文)</span></li>
               </ul>
               <div style="margin-top:16px">
-                <a class="btn" href="https://chromewebstore.google.com/detail/your-extension-id" target="_blank" rel="noreferrer" data-i18n="pricing.btn">Install Extension</a>
+                <button class="btn" type="button" data-pay-cycle="quarterly" data-i18n="pricing.payQuarter">Subscribe Quarterly</button>
               </div>
             </div>
 
@@ -105,7 +106,7 @@
                 <li><svg class="tick" viewBox="0 0 24 24" fill="none"><path d="M20 6L9 17l-5-5" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg><span data-i18n="pricing.item4">Bilingual (EN/中文)</span></li>
               </ul>
               <div style="margin-top:16px">
-                <a class="btn primary" href="https://chromewebstore.google.com/detail/your-extension-id" target="_blank" rel="noreferrer" data-i18n="pricing.btn">Install Extension</a>
+                <button class="btn primary" type="button" data-pay-cycle="yearly" data-i18n="pricing.payYear">Subscribe Yearly</button>
               </div>
             </div>
           </div>

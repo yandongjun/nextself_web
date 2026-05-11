@@ -125,6 +125,18 @@
         item4: 'Bilingual (EN/中文)',
         btn: 'Install Extension',
         note: 'Prices are in USD. Billing handled by your payment provider.',
+        checkoutSuccess: 'Payment completed. Your subscription status is updating. Please return to the extension and refresh the account panel.',
+        checkoutCancel: 'Payment was canceled. You can choose a plan and try again anytime.',
+        payQuarter: 'Subscribe Quarterly',
+        payYear: 'Subscribe Yearly',
+        payProcessing: 'Processing...',
+        payReady: 'Ready to checkout. Complete payment in the popup window.',
+        payNeedLogin: 'Please log in to continue checkout.',
+        payEmailPrompt: 'Enter your account email',
+        payPasswordPrompt: 'Enter your account password',
+        payCanceled: 'Checkout canceled by user.',
+        payNotReady: 'Billing service is not ready. Please try again later.',
+        payFailed: 'Checkout failed. Please try again.',
       },
       docsInstall: {
         title: 'Install — AI Prompt Workspace Docs',
@@ -307,6 +319,18 @@
         item4: '中英双语（EN/中文）',
         btn: '安装插件',
         note: '中文版价格以人民币展示：每季 18 元，每年 70 元。账单与付款由支付平台处理。',
+        checkoutSuccess: '支付已完成，订阅状态正在更新。请返回插件账号面板刷新查看。',
+        checkoutCancel: '你已取消本次支付，可随时重新选择套餐继续。',
+        payQuarter: '订阅季度版',
+        payYear: '订阅年度版',
+        payProcessing: '处理中...',
+        payReady: '已拉起支付，请在弹窗中完成付款。',
+        payNeedLogin: '请先登录账号再进行支付。',
+        payEmailPrompt: '请输入账号邮箱',
+        payPasswordPrompt: '请输入账号密码',
+        payCanceled: '你已取消本次支付。',
+        payNotReady: '支付服务暂未就绪，请稍后重试。',
+        payFailed: '发起支付失败，请稍后重试。',
       },
       docsInstall: {
         title: '安装 — AI Prompt Workspace 文档',
@@ -442,6 +466,192 @@
       btn.textContent = lang === 'zh' ? t(lang, 'common.lang.toEn') : t(lang, 'common.lang.toZh');
       btn.setAttribute('aria-label', lang === 'zh' ? 'Switch to English' : '切换到中文');
     });
+
+    renderCheckoutNotice(lang);
+  };
+
+  const renderCheckoutNotice = (lang) => {
+    const page = document.body && document.body.getAttribute('data-page');
+    if (page !== 'pricing') return;
+    const old = qs('[data-checkout-notice]');
+    if (old) old.remove();
+    const params = new URLSearchParams(window.location.search || '');
+    const checkout = (params.get('checkout') || '').trim().toLowerCase();
+    if (checkout !== 'success' && checkout !== 'cancel') return;
+    const key = checkout === 'success' ? 'pricing.checkoutSuccess' : 'pricing.checkoutCancel';
+    const text = t(lang, key);
+    if (!text) return;
+    const container = qs('.pageHeader .container') || qs('main .container');
+    if (!container) return;
+    const box = document.createElement('div');
+    box.className = 'notice';
+    box.setAttribute('data-checkout-notice', checkout);
+    box.style.marginTop = '12px';
+    box.style.borderColor = checkout === 'success' ? '#16a34a' : '#f59e0b';
+    box.textContent = text;
+    container.appendChild(box);
+  };
+
+  const API_BASE = (() => {
+    const params = new URLSearchParams(window.location.search || '');
+    const fromQuery = (params.get('api_base') || '').trim();
+    if (fromQuery) return fromQuery.replace(/\/+$/, '');
+    return 'https://api.nextself.top';
+  })();
+
+  const ACCESS_TOKEN_KEY = 'apw_access_token';
+  const REFRESH_TOKEN_KEY = 'apw_refresh_token';
+  const USER_EMAIL_KEY = 'apw_user_email';
+
+  const getStored = (key) => {
+    const v = storageGet(key);
+    return (v || '').trim();
+  };
+
+  const setStored = (key, value) => {
+    if (value) {
+      storageSet(key, value);
+      return;
+    }
+    try {
+      localStorage.removeItem(key);
+    } catch {
+      return;
+    }
+  };
+
+  const callApi = async (path, options = {}) => {
+    const accessToken = getStored(ACCESS_TOKEN_KEY);
+    const headers = Object.assign(
+      { 'Content-Type': 'application/json' },
+      options.headers || {}
+    );
+    if (accessToken && !headers.Authorization) {
+      headers.Authorization = `Bearer ${accessToken}`;
+    }
+    const res = await fetch(`${API_BASE}${path}`, {
+      method: options.method || 'GET',
+      headers,
+      body: options.body ? JSON.stringify(options.body) : undefined,
+    });
+    let data = null;
+    try {
+      data = await res.json();
+    } catch {
+      data = null;
+    }
+    if (!res.ok) {
+      const message = (data && (data.message || data.error)) || `HTTP_${res.status}`;
+      const err = new Error(message);
+      err.status = res.status;
+      err.payload = data;
+      throw err;
+    }
+    return data || {};
+  };
+
+  const ensureLoginToken = async (lang) => {
+    const existing = getStored(ACCESS_TOKEN_KEY);
+    if (existing) return existing;
+    alert(t(lang, 'pricing.payNeedLogin'));
+    const defaultEmail = getStored(USER_EMAIL_KEY);
+    const email = (window.prompt(t(lang, 'pricing.payEmailPrompt'), defaultEmail) || '').trim().toLowerCase();
+    if (!email) throw new Error('LOGIN_CANCELED');
+    const password = window.prompt(t(lang, 'pricing.payPasswordPrompt'), '') || '';
+    if (!password) throw new Error('LOGIN_CANCELED');
+    const data = await callApi('/api/auth/login', {
+      method: 'POST',
+      headers: { Authorization: '' },
+      body: { email, password },
+    });
+    const access = String(data.access_token || '').trim();
+    const refresh = String(data.refresh_token || '').trim();
+    if (!access) throw new Error('LOGIN_FAILED');
+    setStored(ACCESS_TOKEN_KEY, access);
+    setStored(REFRESH_TOKEN_KEY, refresh);
+    setStored(USER_EMAIL_KEY, email);
+    return access;
+  };
+
+  const setPayButtonsBusy = (busy, lang) => {
+    qsa('[data-pay-cycle]').forEach((btn) => {
+      const el = btn;
+      if (!(el instanceof HTMLButtonElement)) return;
+      if (busy) {
+        if (!el.dataset.rawText) el.dataset.rawText = el.textContent || '';
+        el.disabled = true;
+        el.textContent = t(lang, 'pricing.payProcessing');
+      } else {
+        el.disabled = false;
+        if (el.dataset.rawText) el.textContent = el.dataset.rawText;
+      }
+    });
+  };
+
+  const showPayNotice = (lang, text, tone) => {
+    const page = document.body && document.body.getAttribute('data-page');
+    if (page !== 'pricing') return;
+    const container = qs('.pageHeader .container') || qs('main .container');
+    if (!container) return;
+    const old = qs('[data-pay-notice]');
+    if (old) old.remove();
+    const box = document.createElement('div');
+    box.className = 'notice';
+    box.setAttribute('data-pay-notice', '1');
+    box.style.marginTop = '12px';
+    if (tone === 'error') box.style.borderColor = '#ef4444';
+    if (tone === 'warn') box.style.borderColor = '#f59e0b';
+    if (tone === 'ok') box.style.borderColor = '#16a34a';
+    box.textContent = text;
+    container.appendChild(box);
+  };
+
+  const startCheckout = async (cycle, lang) => {
+    if (!window.Paddle || typeof window.Paddle.Initialize !== 'function' || !window.Paddle.Checkout) {
+      showPayNotice(lang, t(lang, 'pricing.payNotReady'), 'warn');
+      return;
+    }
+    setPayButtonsBusy(true, lang);
+    try {
+      await ensureLoginToken(lang);
+      const data = await callApi('/api/billing/checkout', {
+        method: 'POST',
+        body: { cycle },
+      });
+      const token = String(data.token || '').trim();
+      const checkout = data.checkout && typeof data.checkout === 'object' ? data.checkout : null;
+      if (!token || !checkout) throw new Error('CHECKOUT_NOT_READY');
+      window.Paddle.Initialize({ token });
+      window.Paddle.Checkout.open(checkout);
+      showPayNotice(lang, t(lang, 'pricing.payReady'), 'ok');
+    } catch (err) {
+      if (err && (err.message === 'LOGIN_CANCELED' || err.message === 'CHECKOUT_CLOSED')) {
+        showPayNotice(lang, t(lang, 'pricing.payCanceled'), 'warn');
+      } else if (err && (err.status === 401 || err.message === 'UNAUTHORIZED' || err.message === 'LOGIN_FAILED')) {
+        setStored(ACCESS_TOKEN_KEY, '');
+        setStored(REFRESH_TOKEN_KEY, '');
+        showPayNotice(lang, t(lang, 'pricing.payNeedLogin'), 'warn');
+      } else {
+        const fallback = t(lang, 'pricing.payFailed');
+        const detail = err && err.message ? ` (${err.message})` : '';
+        showPayNotice(lang, `${fallback}${detail}`, 'error');
+      }
+    } finally {
+      setPayButtonsBusy(false, lang);
+    }
+  };
+
+  const initPricingCheckout = () => {
+    const page = document.body && document.body.getAttribute('data-page');
+    if (page !== 'pricing') return;
+    qsa('[data-pay-cycle]').forEach((btn) => {
+      btn.addEventListener('click', async () => {
+        const cycle = (btn.getAttribute('data-pay-cycle') || '').trim().toLowerCase();
+        if (cycle !== 'quarterly' && cycle !== 'yearly') return;
+        const lang = getLang();
+        await startCheckout(cycle, lang);
+      });
+    });
   };
 
   const burger = qs('[data-burger]');
@@ -494,8 +704,12 @@
   };
 
   if (document.readyState === 'loading') {
-    document.addEventListener('DOMContentLoaded', initLang);
+    document.addEventListener('DOMContentLoaded', () => {
+      initLang();
+      initPricingCheckout();
+    });
   } else {
     initLang();
+    initPricingCheckout();
   }
 })();
