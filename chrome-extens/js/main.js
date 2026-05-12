@@ -137,6 +137,13 @@
         payCanceled: 'Checkout canceled by user.',
         payNotReady: 'Billing service is not ready. Please try again later.',
         payFailed: 'Checkout failed. Please try again.',
+        payBoundAccount: 'Checkout is bound to account: {email}',
+        payNeedToken: 'Open this pricing page from the extension account panel. Direct access is not allowed for checkout.',
+        payTokenExpired: 'Your checkout session is invalid or expired. Please return to the extension and start again.',
+        payGuidePrompt: 'Install the extension first, then sign in inside the extension to bind your subscription before checkout.',
+        guideTitle: 'Install the extension first, then sign in inside the extension to bind your subscription.',
+        guideInstall: 'Install Extension',
+        guideDocs: 'View Install Guide',
       },
       docsInstall: {
         title: 'Install — AI Prompt Workspace Docs',
@@ -331,6 +338,13 @@
         payCanceled: '你已取消本次支付。',
         payNotReady: '支付服务暂未就绪，请稍后重试。',
         payFailed: '发起支付失败，请稍后重试。',
+        payBoundAccount: '当前支付将绑定到账户：{email}',
+        payNeedToken: '请从扩展的账户面板进入支付页，不能直接在网页发起结算。',
+        payTokenExpired: '当前支付会话无效或已过期，请返回扩展重新发起。',
+        payGuidePrompt: '请先安装插件，并在插件内注册或登录账号，再进行订阅绑定和支付。',
+        guideTitle: '请先安装插件，并在插件内注册或登录账号，再绑定订阅并支付。',
+        guideInstall: '安装插件',
+        guideDocs: '查看安装说明',
       },
       docsInstall: {
         title: '安装 — AI Prompt Workspace 文档',
@@ -425,6 +439,11 @@
     return typeof cur === 'string' ? cur : '';
   };
 
+  const formatText = (lang, key, vars = {}) => {
+    const raw = t(lang, key);
+    return String(raw || '').replace(/\{(\w+)\}/g, (_, name) => String(vars[name] ?? ''));
+  };
+
   const applyLang = (lang) => {
     document.documentElement.setAttribute('lang', lang === 'zh' ? 'zh-CN' : 'en');
 
@@ -498,37 +517,18 @@
     if (fromQuery) return fromQuery.replace(/\/+$/, '');
     return 'https://api.nextself.top';
   })();
+  const BILLING_TOKEN = (() => {
+    const params = new URLSearchParams(window.location.search || '');
+    return (params.get('billing_token') || '').trim();
+  })();
 
-  const ACCESS_TOKEN_KEY = 'apw_access_token';
-  const REFRESH_TOKEN_KEY = 'apw_refresh_token';
-  const USER_EMAIL_KEY = 'apw_user_email';
-
-  const getStored = (key) => {
-    const v = storageGet(key);
-    return (v || '').trim();
-  };
-
-  const setStored = (key, value) => {
-    if (value) {
-      storageSet(key, value);
-      return;
-    }
-    try {
-      localStorage.removeItem(key);
-    } catch {
-      return;
-    }
-  };
+  let billingSessionInfo = null;
 
   const callApi = async (path, options = {}) => {
-    const accessToken = getStored(ACCESS_TOKEN_KEY);
     const headers = Object.assign(
       { 'Content-Type': 'application/json' },
       options.headers || {}
     );
-    if (accessToken && !headers.Authorization) {
-      headers.Authorization = `Bearer ${accessToken}`;
-    }
     const res = await fetch(`${API_BASE}${path}`, {
       method: options.method || 'GET',
       headers,
@@ -550,29 +550,6 @@
     return data || {};
   };
 
-  const ensureLoginToken = async (lang) => {
-    const existing = getStored(ACCESS_TOKEN_KEY);
-    if (existing) return existing;
-    alert(t(lang, 'pricing.payNeedLogin'));
-    const defaultEmail = getStored(USER_EMAIL_KEY);
-    const email = (window.prompt(t(lang, 'pricing.payEmailPrompt'), defaultEmail) || '').trim().toLowerCase();
-    if (!email) throw new Error('LOGIN_CANCELED');
-    const password = window.prompt(t(lang, 'pricing.payPasswordPrompt'), '') || '';
-    if (!password) throw new Error('LOGIN_CANCELED');
-    const data = await callApi('/api/auth/login', {
-      method: 'POST',
-      headers: { Authorization: '' },
-      body: { email, password },
-    });
-    const access = String(data.access_token || '').trim();
-    const refresh = String(data.refresh_token || '').trim();
-    if (!access) throw new Error('LOGIN_FAILED');
-    setStored(ACCESS_TOKEN_KEY, access);
-    setStored(REFRESH_TOKEN_KEY, refresh);
-    setStored(USER_EMAIL_KEY, email);
-    return access;
-  };
-
   const setPayButtonsBusy = (busy, lang) => {
     qsa('[data-pay-cycle]').forEach((btn) => {
       const el = btn;
@@ -585,6 +562,12 @@
         el.disabled = false;
         if (el.dataset.rawText) el.textContent = el.dataset.rawText;
       }
+    });
+  };
+
+  const setPayButtonsEnabled = (enabled) => {
+    qsa('[data-pay-cycle]').forEach((btn) => {
+      if (btn instanceof HTMLButtonElement) btn.disabled = !enabled;
     });
   };
 
@@ -606,17 +589,74 @@
     container.appendChild(box);
   };
 
+  const renderBillingAccount = (lang) => {
+    const box = qs('[data-billing-account]');
+    if (!box) return;
+    const email = String(billingSessionInfo && billingSessionInfo.user && billingSessionInfo.user.email || '').trim();
+    if (!email) {
+      box.hidden = true;
+      box.textContent = '';
+      return;
+    }
+    box.hidden = false;
+    box.textContent = formatText(lang, 'pricing.payBoundAccount', { email });
+  };
+
+  const renderBillingGuide = (lang, visible) => {
+    const box = qs('[data-billing-guide]');
+    if (!box) return;
+    box.hidden = !visible;
+    if (visible) {
+      const title = qs('[data-i18n="pricing.guideTitle"]', box);
+      if (title) title.textContent = t(lang, 'pricing.guideTitle');
+    }
+  };
+
+  const loadBillingSession = async (lang) => {
+    if (!BILLING_TOKEN) {
+      billingSessionInfo = null;
+      renderBillingAccount(lang);
+      renderBillingGuide(lang, true);
+      setPayButtonsEnabled(true);
+      return false;
+    }
+    try {
+      billingSessionInfo = await callApi(`/api/billing/session?billing_token=${encodeURIComponent(BILLING_TOKEN)}`, {
+        method: 'GET',
+      });
+      renderBillingAccount(lang);
+      renderBillingGuide(lang, false);
+      setPayButtonsEnabled(true);
+      return true;
+    } catch {
+      billingSessionInfo = null;
+      renderBillingAccount(lang);
+      renderBillingGuide(lang, true);
+      setPayButtonsEnabled(true);
+      showPayNotice(lang, t(lang, 'pricing.payTokenExpired'), 'warn');
+      return false;
+    }
+  };
+
   const startCheckout = async (cycle, lang) => {
     if (!window.Paddle || typeof window.Paddle.Initialize !== 'function' || !window.Paddle.Checkout) {
       showPayNotice(lang, t(lang, 'pricing.payNotReady'), 'warn');
       return;
     }
+    if (!BILLING_TOKEN) {
+      renderBillingGuide(lang, true);
+      showPayNotice(lang, t(lang, 'pricing.payGuidePrompt'), 'warn');
+      return;
+    }
     setPayButtonsBusy(true, lang);
     try {
-      await ensureLoginToken(lang);
+      if (!billingSessionInfo) {
+        const ok = await loadBillingSession(lang);
+        if (!ok) return;
+      }
       const data = await callApi('/api/billing/checkout', {
         method: 'POST',
-        body: { cycle },
+        body: { cycle, billing_token: BILLING_TOKEN },
       });
       const token = String(data.token || '').trim();
       const checkout = data.checkout && typeof data.checkout === 'object' ? data.checkout : null;
@@ -625,12 +665,13 @@
       window.Paddle.Checkout.open(checkout);
       showPayNotice(lang, t(lang, 'pricing.payReady'), 'ok');
     } catch (err) {
-      if (err && (err.message === 'LOGIN_CANCELED' || err.message === 'CHECKOUT_CLOSED')) {
+      if (err && (err.message === 'CHECKOUT_CLOSED')) {
         showPayNotice(lang, t(lang, 'pricing.payCanceled'), 'warn');
-      } else if (err && (err.status === 401 || err.message === 'UNAUTHORIZED' || err.message === 'LOGIN_FAILED')) {
-        setStored(ACCESS_TOKEN_KEY, '');
-        setStored(REFRESH_TOKEN_KEY, '');
-        showPayNotice(lang, t(lang, 'pricing.payNeedLogin'), 'warn');
+      } else if (err && (err.status === 401 || err.message === 'UNAUTHORIZED' || err.message === 'INVALID_BILLING_TOKEN')) {
+        billingSessionInfo = null;
+        renderBillingGuide(lang, true);
+        setPayButtonsEnabled(true);
+        showPayNotice(lang, t(lang, 'pricing.payTokenExpired'), 'warn');
       } else {
         const fallback = t(lang, 'pricing.payFailed');
         const detail = err && err.message ? ` (${err.message})` : '';
@@ -644,6 +685,7 @@
   const initPricingCheckout = () => {
     const page = document.body && document.body.getAttribute('data-page');
     if (page !== 'pricing') return;
+    setPayButtonsEnabled(true);
     qsa('[data-pay-cycle]').forEach((btn) => {
       btn.addEventListener('click', async () => {
         const cycle = (btn.getAttribute('data-pay-cycle') || '').trim().toLowerCase();
@@ -652,6 +694,7 @@
         await startCheckout(cycle, lang);
       });
     });
+    loadBillingSession(getLang()).catch(() => {});
   };
 
   const burger = qs('[data-burger]');

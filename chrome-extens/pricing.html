@@ -8,20 +8,7 @@
     <link rel="icon" href="./assets/icons/logo.svg" type="image/svg+xml" />
     <link rel="stylesheet" href="./css/style.css" />
     <script src="https://cdn.paddle.com/paddle/v2/paddle.js"></script>
-    <script>
-      window.PADDLE_CONFIG = {
-        // "sandbox" for testing, "live" for production
-        environment: "sandbox",
-        // Use client-side token only. Do NOT put API key in frontend code.
-        clientToken: "test_2440efbe7e65215abfa6354c3c8",
-        prices: {
-          quarterly: "pri_01kr97zsc2etbje4mrdds745v0",
-          yearly: "pri_01kr983a50e5gxymsbms25hs0y"
-        }
-      };
-    </script>
     <script defer src="./js/main.js"></script>
-    <script defer src="./js/billing.js"></script>
   </head>
   <body data-page="pricing">
     <a class="skip" href="#main" data-i18n="common.skip">Skip to content</a>
@@ -80,6 +67,14 @@
           <span class="badge"><span class="badgeDot" aria-hidden="true"></span><span data-i18n="pricing.badge">Simple pricing</span></span>
           <h1 data-i18n="pricing.h1">Pricing</h1>
           <p class="subhead" data-i18n="pricing.sub">One product, two plans. Choose quarterly or save with yearly.</p>
+          <div class="notice" style="margin-top:12px" data-billing-account hidden aria-live="polite"></div>
+          <div class="notice" style="margin-top:12px" data-billing-guide hidden>
+            <div data-i18n="pricing.guideTitle">Install the extension first, then sign in inside the extension to bind your subscription.</div>
+            <div style="display:flex;gap:10px;flex-wrap:wrap;margin-top:12px">
+              <a class="btn primary" href="https://chromewebstore.google.com/detail/your-extension-id" target="_blank" rel="noreferrer" data-i18n="pricing.guideInstall">Install Extension</a>
+              <a class="btn ghost" href="./docs/install.html" data-i18n="pricing.guideDocs">View Install Guide</a>
+            </div>
+          </div>
         </div>
       </section>
 
@@ -100,10 +95,7 @@
                 <li><svg class="tick" viewBox="0 0 24 24" fill="none"><path d="M20 6L9 17l-5-5" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg><span data-i18n="pricing.item4">Bilingual (EN/中文)</span></li>
               </ul>
               <div style="margin-top:16px">
-                <button class="btn" type="button" data-paddle-checkout="quarterly">
-                  <span data-lang="en">Subscribe Quarterly</span>
-                  <span data-lang="zh">订阅季度版</span>
-                </button>
+                <button class="btn" type="button" data-pay-cycle="quarterly" data-i18n="pricing.payQuarter">Subscribe Quarterly</button>
               </div>
             </div>
 
@@ -122,10 +114,7 @@
                 <li><svg class="tick" viewBox="0 0 24 24" fill="none"><path d="M20 6L9 17l-5-5" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg><span data-i18n="pricing.item4">Bilingual (EN/中文)</span></li>
               </ul>
               <div style="margin-top:16px">
-                <button class="btn primary" type="button" data-paddle-checkout="yearly">
-                  <span data-lang="en">Subscribe Yearly</span>
-                  <span data-lang="zh">订阅年度版</span>
-                </button>
+                <button class="btn primary" type="button" data-pay-cycle="yearly" data-i18n="pricing.payYear">Subscribe Yearly</button>
               </div>
             </div>
           </div>

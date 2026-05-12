@@ -126,52 +126,52 @@ npx serve -l 5173
 
 ## 支付接入（Paddle）
 
-当前已在 `pricing.html` 接入 Paddle.js，并绑定两个套餐按钮：
+当前支付页已接入 Paddle.js，并绑定两个套餐按钮：
 
 - `quarterly`（季度）
 - `yearly`（年度）
 
 实现文件：
 
-- `pricing.html`（引入 Paddle.js + 配置对象 + 订阅按钮）
-- `js/billing.js`（初始化 Paddle 并拉起 Checkout）
+- `pricing.html`（引入 Paddle.js + 订阅按钮 + 账户绑定提示）
+- `js/main.js`（解析 `billing_token`、查询绑定账户、调用后端生成 Checkout）
 
 ### 你需要配置的参数
 
-在 `pricing.html` 里找到：
+- 后端 `config.json` / 环境变量中的：
+  - `paddle.client_token`
+    - Paddle 前端 Token（测试环境通常以 `test_` 开头）
+  - `paddle.price_id_quarterly`
+    - 季度套餐对应的 Paddle `priceId`（通常形如 `pri_...`）
+  - `paddle.price_id_yearly`
+    - 年度套餐对应的 Paddle `priceId`
+  - `paddle.success_url`
+    - 支付成功后的回跳地址
+  - `paddle.cancel_url`
+    - 取消支付后的回跳地址
 
-```js
-window.PADDLE_CONFIG = {
-  environment: "sandbox",
-  clientToken: "",
-  prices: {
-    quarterly: "",
-    yearly: ""
-  }
-};
+支付入口现在由扩展端先向后端申请短时效 `billing_token`，再打开：
+
+```text
+pricing.html?api_base=...&billing_token=...
 ```
 
-需要你提供并填入：
-
-- `clientToken`
-  - Paddle 前端 Token（测试环境通常以 `test_` 开头）
-- `prices.quarterly`
-  - 季度套餐对应的 Paddle `priceId`（通常形如 `pri_...`）
-- `prices.yearly`
-  - 年度套餐对应的 Paddle `priceId`
+支付页只消费 `billing_token`，不会再自己要求输入邮箱密码。
 
 ### 切到生产环境
 
 测试完成后将：
 
-- `environment: "sandbox"` 改为 `environment: "live"`
-- 同时替换为生产 `clientToken` 与生产 `priceId`
+- 替换为生产环境的 `client_token` 与生产 `priceId`
+- 确认 `success_url` / `cancel_url` 已改为正式域名
+- 确认后端 webhook 密钥已切到生产环境
 
 ### 说明
 
 - 当前实现为前端拉起 Checkout（overlay 模式）
-- 前端接入只能完成“发起支付”
-- 如果你要做“开通会员/权限变更/订单校验”，还需要服务端 Webhook
+- 但支付身份由后端签发的 `billing_token` 绑定到当前扩展账号
+- 支付页本身不维护独立登录态
+- 开通会员/权限变更/订单校验仍由服务端 Webhook 完成
 
 ## 对接支付还需要你提供什么
 
@@ -193,8 +193,10 @@ window.PADDLE_CONFIG = {
 
 已完成：
 
-- 前端接入 Paddle.js（`pricing.html` + `js/billing.js`）
-- 按钮可拉起沙箱 Checkout（季度/年度各自 `priceId`）
+- 前端接入 Paddle.js（`pricing.html` + `js/main.js`）
+- 扩展升级入口先校验登录态，再申请 `billing_token`
+- 未登录用户先登录/注册；匿名本地数据先认领，再进入支付
+- 支付页显示当前绑定账户邮箱，并按 `billing_token` 发起 Checkout
 - 支付流程页：
   - `success.html`（支付成功回跳）
   - `cancel.html`（取消支付回跳）
