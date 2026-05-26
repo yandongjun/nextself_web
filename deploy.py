@@ -97,7 +97,6 @@ def deploy(force=False):
         print("[FORCE] 强制部署...")
 
     upload_count = 0
-    skip_count = 0
     for root, dirs, files in os.walk(LOCAL_DIR):
         for dir_name in dirs:
             if dir_name.startswith("."):
@@ -112,14 +111,6 @@ def deploy(force=False):
             local_file = os.path.join(root, file_name)
             rel_path = os.path.relpath(local_file, LOCAL_DIR)
             remote_file = REMOTE_DIR + "/" + rel_path.replace("\\", "/")
-
-            try:
-                remote_attr = sftp.stat(remote_file)
-                if remote_attr.st_size == os.path.getsize(local_file):
-                    skip_count += 1
-                    continue
-            except FileNotFoundError:
-                pass
 
             ensure_dir(sftp, os.path.dirname(remote_file))
             sftp.put(local_file, remote_file)
@@ -136,7 +127,7 @@ def deploy(force=False):
     stdout.channel.recv_exit_status()
 
     ssh.close()
-    print(f"\nDone: {upload_count} uploaded, {skip_count} skipped (unchanged)")
+    print(f"\nDone: {upload_count} uploaded")
     if upload_count > 0:
         print(f"Deployed version: {local_ver[:8]}")
         print("Nginx reloaded.")
