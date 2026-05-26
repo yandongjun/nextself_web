@@ -252,9 +252,9 @@ pricing.html?api_base=...&billing_token=...
 - GitHub 地址：
   - `https://github.com/yourname/chrome-extens`
 - Chrome Web Store 地址：
-  - `https://chromewebstore.google.com/detail/ai-prompt-workspace/ipedofdipnhlelljcebgnjjohnjommdk`
+  - `https://extension.nextself.top/docs/install.html#store-pending`
 - 联系邮箱：
-  - `support@yourdomain.com`
+  - `ydjydn@gmail.com`
 
 建议在上线前统一全局替换。
 

@@ -13,10 +13,10 @@
           docs: 'Docs',
           privacy: 'Privacy',
           github: 'GitHub',
-          install: 'Install',
+          install: 'Download',
           ctaPricing: 'See pricing',
           ctaFeatures: 'See features',
-          ctaInstall: 'Install Extension',
+          ctaInstall: 'Download Extension',
           openMenu: 'Open menu',
         },
         footer: {
@@ -36,7 +36,7 @@
           badge: 'Right‑click save · AI auto tag · Right‑click paste',
           subhead:
             'Save prompts instantly from your browser. AI automatically categorizes and tags them. When you need them, right‑click to paste recent or pinned prompts anywhere.',
-          ctaInstall: 'Install Extension',
+          ctaInstall: 'Download Extension',
           ctaFeatures: 'See features',
           note: 'Core: Right‑click save · AI auto tag · Recent & Pinned · Right‑click paste',
           kpi1t: 'Save from right‑click',
@@ -140,21 +140,27 @@
         payBoundAccount: 'Checkout is bound to account: {email}',
         payNeedToken: 'Open this pricing page from the extension account panel. Direct access is not allowed for checkout.',
         payTokenExpired: 'Your checkout session is invalid or expired. Please return to the extension and start again.',
-        payGuidePrompt: 'Install the extension first, then sign in inside the extension to bind your subscription before checkout.',
-        guideTitle: 'Install the extension first, then sign in inside the extension to bind your subscription.',
-        guideInstall: 'Install Extension',
+        payCheckoutErrorDetail: 'Checkout error: {detail}',
+        payGuidePrompt: 'Download the extension first, then sign in inside the extension to bind your subscription before checkout.',
+        guideTitle: 'Download the extension first, then sign in inside the extension to bind your subscription.',
+        guideInstall: 'Download Extension',
         guideDocs: 'View Install Guide',
+        providerLabel: 'Payment channel',
+        providerAuto: 'Auto',
+        providerPaddle: 'Paddle',
+        providerCreem: 'Creem',
+        providerSwitched: 'Payment channel switched: {from} → {to}',
       },
       docsInstall: {
         title: 'Install — AI Prompt Workspace Docs',
-        desc: 'Install and get started with right‑click save and paste.',
-        h1: 'Install & quick start',
-        sub: 'Install in 1 minute. Save and paste prompts by right‑click.',
-        s1t: 'Install',
-        s1a: 'Open the Chrome Web Store listing',
-        s1b: 'Click “Add to Chrome”',
-        s1c: 'Pin the extension (optional)',
-        open: 'Open listing',
+        desc: 'Download and get started with right‑click save and paste.',
+        h1: 'Download & install',
+        sub: 'Download in 1 minute. Install in 2 minutes. Save and paste prompts by right‑click.',
+        s1t: 'Download',
+        s1a: 'Download the ZIP package from our website',
+        s1b: 'Unzip the package',
+        s1c: 'Open chrome://extensions → Developer mode → Load unpacked',
+        open: 'Download ZIP',
         s2t: 'First use',
         s2a: 'Select text → right‑click → Save as Prompt',
         s2b: 'AI auto categorizes and tags it',
@@ -214,10 +220,10 @@
           docs: '文档',
           privacy: '隐私',
           github: 'GitHub',
-          install: '安装插件',
+          install: '下载插件',
           ctaPricing: '查看定价',
           ctaFeatures: '查看功能',
-          ctaInstall: '安装插件',
+          ctaInstall: '下载插件',
           openMenu: '打开菜单',
         },
         footer: {
@@ -237,7 +243,7 @@
           badge: '右键保存 · AI 自动分类打标签 · 右键粘贴',
           subhead:
             '在浏览器里一键沉淀 Prompt：右键保存，AI 自动分类与打标签。需要使用时，右键直接粘贴最近使用或置顶提示词到当前输入框。',
-          ctaInstall: '安装插件',
+          ctaInstall: '下载插件',
           ctaFeatures: '查看功能',
           note: '核心：右键保存 · AI 自动打标签 · 最近使用/置顶 · 右键粘贴',
           kpi1t: '右键保存',
@@ -341,21 +347,27 @@
         payBoundAccount: '当前支付将绑定到账户：{email}',
         payNeedToken: '请从扩展的账户面板进入支付页，不能直接在网页发起结算。',
         payTokenExpired: '当前支付会话无效或已过期，请返回扩展重新发起。',
-        payGuidePrompt: '请先安装插件，并在插件内注册或登录账号，再进行订阅绑定和支付。',
-        guideTitle: '请先安装插件，并在插件内注册或登录账号，再绑定订阅并支付。',
-        guideInstall: '安装插件',
+        payCheckoutErrorDetail: '支付错误：{detail}',
+        payGuidePrompt: '请先下载并安装插件，并在插件内注册或登录账号，再进行订阅绑定和支付。',
+        guideTitle: '请先下载并安装插件，并在插件内注册或登录账号，再绑定订阅并支付。',
+        guideInstall: '下载插件',
         guideDocs: '查看安装说明',
+        providerLabel: '支付通道',
+        providerAuto: '自动',
+        providerPaddle: 'Paddle',
+        providerCreem: 'Creem',
+        providerSwitched: '已自动切换支付通道：{from} → {to}',
       },
       docsInstall: {
         title: '安装 — AI Prompt Workspace 文档',
-        desc: '安装并快速上手：右键保存与右键粘贴。',
-        h1: '安装与快速上手',
-        sub: '1 分钟安装，右键保存与右键粘贴开始复用。',
-        s1t: '安装步骤',
-        s1a: '打开 Chrome Web Store 插件页',
-        s1b: '点击「添加至 Chrome」',
-        s1c: '固定到工具栏（可选）',
-        open: '打开插件页',
+        desc: '下载并快速上手：右键保存与右键粘贴。',
+        h1: '下载与安装',
+        sub: '1 分钟下载，2 分钟安装。右键保存与右键粘贴开始复用。',
+        s1t: '下载与安装',
+        s1a: '从官网下载安装包（ZIP）',
+        s1b: '解压 ZIP',
+        s1c: '打开 chrome://extensions → 开发者模式 → 加载已解压的扩展程序',
+        open: '下载 ZIP',
         s2t: '首次使用',
         s2a: '选中文本 → 右键 → 保存为 Prompt',
         s2b: 'AI 自动分类并打标签',
@@ -487,6 +499,7 @@
     });
 
     renderCheckoutNotice(lang);
+    renderBillingProviderSelector(lang);
   };
 
   const renderCheckoutNotice = (lang) => {
@@ -521,6 +534,36 @@
     const params = new URLSearchParams(window.location.search || '');
     return (params.get('billing_token') || '').trim();
   })();
+
+  const LOCAL_DEBUG_HOSTS = new Set(['127.0.0.1', 'localhost']);
+  const normalizeBillingProvider = (value) => {
+    const raw = String(value || '').trim().toLowerCase();
+    if (raw === 'paddle' || raw === 'creem') return raw;
+    return 'auto';
+  };
+  const getQueryBillingProvider = () => {
+    const params = new URLSearchParams(window.location.search || '');
+    const fromQuery = normalizeBillingProvider(params.get('provider'));
+    return fromQuery !== 'auto' ? fromQuery : '';
+  };
+  let billingProviderSelection = '';
+  let billingProvidersInfo = null;
+  const getBillingProvider = () => {
+    if (billingProviderSelection) return billingProviderSelection;
+    const fromQuery = getQueryBillingProvider();
+    if (fromQuery) return fromQuery;
+    const fromServer = normalizeBillingProvider(billingProvidersInfo && billingProvidersInfo.default_provider);
+    return fromServer !== 'auto' ? fromServer : 'creem';
+  };
+  const setBillingProvider = (value) => {
+    billingProviderSelection = normalizeBillingProvider(value);
+  };
+  const shouldOmitPaddleCancelUrl = () => {
+    const params = new URLSearchParams(window.location.search || '');
+    const raw = String(params.get('omit_paddle_cancel_url') || '').trim().toLowerCase();
+    if (raw === '1' || raw === 'true' || raw === 'yes') return true;
+    return LOCAL_DEBUG_HOSTS.has(String(window.location.hostname || '').trim().toLowerCase());
+  };
 
   let billingSessionInfo = null;
 
@@ -612,6 +655,36 @@
     }
   };
 
+  const renderBillingProviderSelector = (lang) => {
+    const page = document.body && document.body.getAttribute('data-page');
+    if (page !== 'pricing') return;
+    const sel = qs('[data-billing-provider]');
+    if (!(sel instanceof HTMLSelectElement)) return;
+    const textKey = { auto: 'pricing.providerAuto', paddle: 'pricing.providerPaddle', creem: 'pricing.providerCreem' };
+    Array.from(sel.options || []).forEach((opt) => {
+      const key = textKey[String(opt.value || '').trim().toLowerCase()] || '';
+      if (key) opt.textContent = t(lang, key);
+    });
+    sel.value = getBillingProvider();
+    if (!sel.dataset.bound) {
+      sel.dataset.bound = '1';
+      sel.addEventListener('change', () => {
+        setBillingProvider(sel.value);
+      });
+    }
+  };
+
+  const loadBillingProviders = async () => {
+    const page = document.body && document.body.getAttribute('data-page');
+    if (page !== 'pricing') return;
+    try {
+      billingProvidersInfo = await callApi('/api/billing/providers', { method: 'GET' });
+    } catch {
+      billingProvidersInfo = null;
+    }
+    renderBillingProviderSelector(getLang());
+  };
+
   const loadBillingSession = async (lang) => {
     if (!BILLING_TOKEN) {
       billingSessionInfo = null;
@@ -639,10 +712,6 @@
   };
 
   const startCheckout = async (cycle, lang) => {
-    if (!window.Paddle || typeof window.Paddle.Initialize !== 'function' || !window.Paddle.Checkout) {
-      showPayNotice(lang, t(lang, 'pricing.payNotReady'), 'warn');
-      return;
-    }
     if (!BILLING_TOKEN) {
       renderBillingGuide(lang, true);
       showPayNotice(lang, t(lang, 'pricing.payGuidePrompt'), 'warn');
@@ -654,17 +723,129 @@
         const ok = await loadBillingSession(lang);
         if (!ok) return;
       }
+      const sel = qs('[data-billing-provider]');
+      const preferred = normalizeBillingProvider(sel && sel.value);
+      setBillingProvider(preferred);
+      try {
+        console.info('[BILLING_CHECKOUT_REQUEST]', {
+          cycle,
+          preferred,
+          selected: sel && sel.value ? String(sel.value) : '',
+          billingTokenPrefix: BILLING_TOKEN ? String(BILLING_TOKEN).slice(0, 12) : '',
+        });
+      } catch {
+        // noop
+      }
       const data = await callApi('/api/billing/checkout', {
         method: 'POST',
-        body: { cycle, billing_token: BILLING_TOKEN },
+        body: {
+          cycle,
+          billing_token: BILLING_TOKEN,
+          provider: preferred,
+          omit_paddle_cancel_url: shouldOmitPaddleCancelUrl(),
+        },
       });
+      const used = normalizeBillingProvider(data.provider_used || data.provider);
+      try {
+        console.info('[BILLING_CHECKOUT_RESPONSE]', {
+          preferred,
+          used,
+          fallbackUsed: !!data.fallback_used,
+          action: data.action || '',
+          provider: data.provider || '',
+          checkoutUrl: data.checkout_url ? String(data.checkout_url).slice(0, 80) : '',
+          tokenPrefix: data.token ? String(data.token).slice(0, 12) : '',
+          priceId: data.checkout && data.checkout.items && data.checkout.items[0] ? data.checkout.items[0].priceId : '',
+        });
+      } catch {
+        // noop
+      }
+      if (preferred !== 'auto' && used !== preferred) {
+        showPayNotice(lang, `Payment channel mismatch: selected ${preferred}, actual ${used}. Please refresh and retry.`, 'error');
+        try {
+          console.error('[BILLING_PROVIDER_MISMATCH]', { preferred, used, data });
+        } catch {
+          // noop
+        }
+        return;
+      }
+      if (data.fallback_used && used) {
+        showPayNotice(lang, formatText(lang, 'pricing.providerSwitched', { from: preferred, to: used }), 'warn');
+      }
+      if (used === 'creem') {
+        const url = String(data.checkout_url || '').trim();
+        if (!url) throw new Error('CHECKOUT_NOT_READY');
+        window.open(url, '_blank', 'noreferrer');
+        showPayNotice(lang, t(lang, 'pricing.payReady'), 'ok');
+        return;
+      }
+
       const token = String(data.token || '').trim();
       const checkout = data.checkout && typeof data.checkout === 'object' ? data.checkout : null;
       if (!token || !checkout) throw new Error('CHECKOUT_NOT_READY');
-      window.Paddle.Initialize({ token });
+      if (!window.Paddle || typeof window.Paddle.Initialize !== 'function' || !window.Paddle.Checkout) {
+        const fallback = await callApi('/api/billing/checkout', {
+          method: 'POST',
+          body: { cycle, billing_token: BILLING_TOKEN, provider: 'creem' },
+        });
+        const url = String(fallback.checkout_url || '').trim();
+        if (!url) throw new Error('CHECKOUT_NOT_READY');
+        showPayNotice(lang, formatText(lang, 'pricing.providerSwitched', { from: 'paddle', to: 'creem' }), 'warn');
+        window.open(url, '_blank', 'noreferrer');
+        showPayNotice(lang, t(lang, 'pricing.payReady'), 'ok');
+        return;
+      }
+      if (window.Paddle.Environment && typeof window.Paddle.Environment.set === 'function') {
+        if (token.startsWith('test_')) window.Paddle.Environment.set('sandbox');
+      }
+      window.Paddle.Initialize({
+        token,
+        eventCallback: (evt) => {
+          const lang = getLang();
+          try {
+            if (!evt || typeof evt !== 'object') return;
+            const type = String(evt.type || '').trim();
+            if (type === 'checkout.completed') {
+              showPayNotice(lang, t(lang, 'pricing.checkoutSuccess'), 'ok');
+              try {
+                console.info('[PADDLE_CHECKOUT_COMPLETED]', evt);
+              } catch {
+                // noop
+              }
+              return;
+            }
+            if (type !== 'checkout.error') return;
+            const detail = String(evt.detail || evt.message || evt.code || 'unknown').trim();
+            try {
+              console.error('[PADDLE_CHECKOUT_ERROR]', evt);
+            } catch {
+              // noop
+            }
+            showPayNotice(lang, formatText(lang, 'pricing.payCheckoutErrorDetail', { detail }), 'error');
+          } catch {
+            return;
+          }
+        },
+      });
+      try {
+        console.info('[PADDLE_CHECKOUT_OPEN]', {
+          preferred,
+          used,
+          tokenPrefix: token.slice(0, 12),
+          priceId: checkout && checkout.items && checkout.items[0] ? checkout.items[0].priceId : '',
+          customerEmail: checkout && checkout.customer ? checkout.customer.email : '',
+        });
+      } catch {
+        // noop
+      }
       window.Paddle.Checkout.open(checkout);
       showPayNotice(lang, t(lang, 'pricing.payReady'), 'ok');
     } catch (err) {
+      try {
+        console.error('[BILLING_CHECKOUT_THROW]', err);
+      } catch {
+        // noop
+      }
       if (err && (err.message === 'CHECKOUT_CLOSED')) {
         showPayNotice(lang, t(lang, 'pricing.payCanceled'), 'warn');
       } else if (err && (err.status === 401 || err.message === 'UNAUTHORIZED' || err.message === 'INVALID_BILLING_TOKEN')) {
@@ -686,6 +867,7 @@
     const page = document.body && document.body.getAttribute('data-page');
     if (page !== 'pricing') return;
     setPayButtonsEnabled(true);
+    renderBillingProviderSelector(getLang());
     qsa('[data-pay-cycle]').forEach((btn) => {
       btn.addEventListener('click', async () => {
         const cycle = (btn.getAttribute('data-pay-cycle') || '').trim().toLowerCase();
@@ -694,6 +876,7 @@
         await startCheckout(cycle, lang);
       });
     });
+    loadBillingProviders().catch(() => {});
     loadBillingSession(getLang()).catch(() => {});
   };
 

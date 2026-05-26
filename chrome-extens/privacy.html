@@ -7,7 +7,7 @@
     <meta name="description" content="What data we collect, what we do not collect, how we store it, and third‑party services." />
     <link rel="icon" href="./assets/icons/logo.svg" type="image/svg+xml" />
     <link rel="stylesheet" href="./css/style.css" />
-    <script defer src="./js/main.js"></script>
+    <script defer src="./js/main.js?v=20260517-creemfix"></script>
   </head>
   <body>
     <a class="skip" href="#main" data-i18n="common.skip">Skip to content</a>
@@ -28,13 +28,13 @@
             <a href="./pricing.html" data-i18n="common.nav.pricing">Pricing</a>
             <a href="./docs/install.html" data-i18n="common.nav.docs">Docs</a>
             <a href="./privacy.html" aria-current="page" data-i18n="common.nav.privacy">Privacy</a>
-            <a href="https://chromewebstore.google.com/detail/ai-prompt-workspace/ipedofdipnhlelljcebgnjjohnjommdk" target="_blank" rel="noreferrer" data-i18n="common.nav.install">Install</a>
+            <a href="https://extension.nextself.top/downloads/ai-prompt-workspace-chrome-webstore.zip" download rel="noreferrer" data-i18n="common.nav.install">Install</a>
           </div>
 
           <div class="navRight">
             <button class="btn small" type="button" data-lang-toggle>中文</button>
             <a class="btn small ghost" href="./pricing.html" data-i18n="common.nav.ctaPricing">See pricing</a>
-            <a class="btn primary" href="https://chromewebstore.google.com/detail/ai-prompt-workspace/ipedofdipnhlelljcebgnjjohnjommdk" target="_blank" rel="noreferrer" data-i18n="common.nav.ctaInstall">Install Extension</a>
+            <a class="btn primary" href="https://extension.nextself.top/downloads/ai-prompt-workspace-chrome-webstore.zip" download rel="noreferrer" data-i18n="common.nav.ctaInstall">Install Extension</a>
             <button class="burger" type="button" aria-label="打开菜单" aria-expanded="false" data-burger>
               <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
                 <path d="M4 7H20" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
@@ -50,11 +50,11 @@
           <a href="./pricing.html"><span data-i18n="common.nav.pricing">Pricing</span> <span>→</span></a>
           <a href="./docs/install.html"><span data-i18n="common.nav.docs">Docs</span> <span>→</span></a>
           <a href="./privacy.html"><span data-i18n="common.nav.privacy">Privacy</span> <span>→</span></a>
-          <a href="https://chromewebstore.google.com/detail/ai-prompt-workspace/ipedofdipnhlelljcebgnjjohnjommdk" target="_blank" rel="noreferrer"><span data-i18n="common.nav.install">Install</span> <span>↗</span></a>
+          <a href="https://extension.nextself.top/downloads/ai-prompt-workspace-chrome-webstore.zip" download rel="noreferrer"><span data-i18n="common.nav.install">Install</span> <span>↗</span></a>
           <div class="ctaRow">
             <button class="btn small" type="button" data-lang-toggle>中文</button>
             <a class="btn small" href="./pricing.html" data-i18n="common.nav.ctaPricing">See pricing</a>
-            <a class="btn small primary" href="https://chromewebstore.google.com/detail/ai-prompt-workspace/ipedofdipnhlelljcebgnjjohnjommdk" target="_blank" rel="noreferrer" data-i18n="common.nav.install">Install</a>
+            <a class="btn small primary" href="https://extension.nextself.top/downloads/ai-prompt-workspace-chrome-webstore.zip" download rel="noreferrer" data-i18n="common.nav.install">Install</a>
           </div>
         </div>
       </div>
@@ -69,109 +69,131 @@
             <span data-lang="en">This page explains how AI Prompt Workspace collects, uses, stores, and protects your data when providing the Chrome extension and related services.</span>
             <span data-lang="zh">本页面用于说明 AI Prompt Workspace（“我们”）在提供 Chrome 插件与相关服务时，如何收集、使用、存储与保护你的数据。</span>
           </p>
-          <div class="notice" style="margin-top:14px" data-lang="en">Effective date: 2026-05-04 · Contact: <a href="mailto:support@yourdomain.com">support@yourdomain.com</a></div>
-          <div class="notice" style="margin-top:14px" data-lang="zh">生效日期：2026-05-04 · 联系方式：<a href="mailto:support@yourdomain.com">support@yourdomain.com</a></div>
+          <div class="notice" style="margin-top:14px" data-lang="en">Effective date: 2026-05-04 · Contact: <a href="mailto:ydjydn@gmail.com">ydjydn@gmail.com</a></div>
+          <div class="notice" style="margin-top:14px" data-lang="zh">生效日期：2026-05-04 · 联系方式：<a href="mailto:ydjydn@gmail.com">ydjydn@gmail.com</a></div>
         </div>
       </section>
 
       <section class="section" style="padding-top:22px">
         <div class="container">
           <div class="legal" data-lang="en">
-            <div class="callout">Our principles: collect only what is necessary to provide the service; store data locally by default; if sync is enabled, encrypt in transit and at rest.</div>
+            <div class="callout">Our principles: collect only what is needed to provide the product, keep prompt data local by default, and clearly explain when data is sent to our backend or service providers.</div>
 
             <h3>1. Data we collect</h3>
             <ul>
-              <li><b>Account information (optional)</b>: if you sign in, purchase a subscription, or enable future sync features, we may collect email and basic identifiers.</li>
-              <li><b>Prompt content (you save)</b>: prompt text, title, description, tags, categories, pinned status, and related metadata.</li>
-              <li><b>Minimal usage logs</b>: to improve stability and debug issues (e.g., crash data and performance metrics), excluding sensitive input.</li>
+              <li><b>Account information</b>: when you register, sign in, manage your subscription, or request support, we may process your email address, account identifier, and authentication credentials. Passwords are sent over HTTPS and stored server-side in hashed form rather than plain text.</li>
+              <li><b>Prompt content and metadata</b>: when you save, classify, sync, or restore prompts, we may process prompt text, title, description, tags, categories, variables, examples, usage counters, and timestamps.</li>
+              <li><b>Usage and diagnostics data</b>: to keep the product reliable, we may process a minimal installation identifier, extension version, browser or platform information, feature usage events, quota state, and error diagnostics.</li>
+              <li><b>Billing-related data</b>: when you open checkout or manage a plan, we may process billing session tokens, subscription status, provider customer identifiers, and the account email linked to the subscription.</li>
             </ul>
 
-            <h3>2. Data we do not collect</h3>
+            <h3>2. How we use data</h3>
             <ul>
-              <li>We do not read or collect your browsing history.</li>
-              <li>We do not collect your passwords, OTP codes, or sensitive authentication secrets.</li>
-              <li>We do not directly collect your payment card details (handled by third‑party payment providers).</li>
+              <li>Provide account, sync, restore, and subscription features.</li>
+              <li>Save, organize, search, and restore your prompt library.</li>
+              <li>Run AI-assisted prompt classification and related backend features.</li>
+              <li>Enforce quotas, prevent abuse, debug failures, and improve stability.</li>
             </ul>
 
-            <h3>3. How data is stored</h3>
+            <h3>3. What we do not collect by default</h3>
             <ul>
-              <li><b>Local storage</b>: by default, prompts are stored locally in your browser.</li>
-              <li><b>Encryption</b>: if cloud sync is enabled in the future, data is transmitted over HTTPS and encrypted at rest.</li>
-              <li><b>Cloud sync</b>: only used for translation and your data storage (where applicable).</li>
+              <li>We do not collect your full browsing history.</li>
+              <li>We do not read arbitrary page content in the background without a user action.</li>
+              <li>We do not directly collect your full payment card details; payment providers handle that data.</li>
             </ul>
+            <p>When you explicitly use the extension to save selected text, classify a prompt, or insert a prompt into an editable field, the extension may read the relevant text needed to complete that action.</p>
 
-            <h3>4. Third‑party services</h3>
-            <p>Depending on your chosen integrations, we may use third‑party services for authentication, storage, or billing:</p>
+            <h3>4. How data is stored</h3>
             <ul>
-              <li><b>Google OAuth</b>: sign‑in and authentication.</li>
-              <li><b>Firebase / Supabase</b>: storage and databases (if applicable).</li>
-              <li><b>Stripe / LemonSqueezy</b>: subscription billing (if applicable).</li>
+              <li><b>Local by default</b>: prompts and UI state are primarily stored in the browser extension's local storage.</li>
+              <li><b>Backend storage when needed</b>: account, billing, sync, and AI-assisted features may require relevant data to be sent to our backend service.</li>
+              <li><b>Transport security</b>: data is transmitted over HTTPS.</li>
             </ul>
 
-            <h3>5. Sharing and disclosure</h3>
+            <h3>5. Third-party services</h3>
+            <p>To operate the product, we may use service providers such as:</p>
+            <ul>
+              <li><b>Creem / Paddle</b>: subscription checkout and billing management.</li>
+              <li><b>Infrastructure and hosting providers</b>: website and backend operation.</li>
+              <li><b>AI model providers configured by our backend</b>: prompt classification or related AI features.</li>
+            </ul>
+
+            <h3>6. Sharing and disclosure</h3>
             <ul>
               <li>We do not sell your personal data.</li>
-              <li>We share the minimum necessary data only to provide the service or comply with legal obligations.</li>
+              <li>We share only the minimum data required to provide the service, process billing, operate AI-assisted features, comply with legal obligations, or protect the service against fraud and abuse.</li>
             </ul>
 
-            <h3>6. Your rights and controls</h3>
+            <h3>7. Your controls</h3>
             <ul>
-              <li>You can delete prompts you saved (as supported by the product).</li>
-              <li>You may request deletion of cloud data if sync is enabled (where applicable).</li>
+              <li>You can delete prompts stored locally in the extension.</li>
+              <li>You can request deletion of account-linked cloud data by contacting us.</li>
+              <li>You can stop using account, billing, or cloud-backed features at any time.</li>
             </ul>
 
-            <h3>7. Contact</h3>
-            <p>If you have questions about this policy, contact: <a href="mailto:support@yourdomain.com">support@yourdomain.com</a>.</p>
+            <h3>8. Contact</h3>
+            <p>If you have questions about this policy or want to request data deletion, contact: <a href="mailto:ydjydn@gmail.com">ydjydn@gmail.com</a>.</p>
           </div>
 
           <div class="legal" data-lang="zh">
             <div class="callout">
-              我们的原则：只收集提供服务所必需的数据；默认优先本地存储；如启用云同步，会加密传输与存储。
+              我们的原则：只收集提供产品所必需的数据；默认优先本地存储 Prompt；当数据会发送到我们的后端或第三方服务商时，会尽量明确说明。
             </div>
 
             <h3>1. 我们收集哪些数据</h3>
             <ul>
-              <li><b>账号信息（可选）</b>：当你选择登录/开通订阅/启用云同步时，可能需要邮箱、用户标识、昵称等。</li>
-              <li><b>Prompt 内容（你主动保存的）</b>：包括 Prompt 文本、标题、描述、标签、变量模板、示例等。</li>
-              <li><b>使用日志（最小化）</b>：用于改进稳定性与排查错误，例如崩溃信息、功能点击、性能指标等（不包含你的敏感输入内容）。</li>
+              <li><b>账号信息</b>：当你注册、登录、管理订阅或寻求支持时，我们可能处理你的邮箱地址、账号标识和认证凭据。密码会通过 HTTPS 传输，并在服务端以哈希形式保存，而不是明文保存。</li>
+              <li><b>Prompt 内容与元数据</b>：当你保存、分类、同步或恢复 Prompt 时，我们可能处理 Prompt 文本、标题、描述、标签、分类、变量、示例、使用次数和时间戳等信息。</li>
+              <li><b>使用与诊断数据</b>：为保证产品稳定性，我们可能处理最小化的安装标识、扩展版本、浏览器或平台信息、功能使用事件、额度状态以及错误诊断信息。</li>
+              <li><b>计费相关数据</b>：当你打开结账页或管理订阅时，我们可能处理 billing session token、订阅状态、支付提供商侧的客户标识，以及与你订阅关联的邮箱地址。</li>
             </ul>
 
-            <h3>2. 我们不会收集什么</h3>
+            <h3>2. 我们如何使用这些数据</h3>
             <ul>
-              <li>不会读取或收集你的浏览历史。</li>
-              <li>不会收集你的密码、验证码、表单账号密钥等敏感认证信息。</li>
-              <li>不会直接收集你的支付卡号等支付信息（支付由第三方支付平台处理）。</li>
+              <li>提供账号、同步、恢复和订阅能力。</li>
+              <li>保存、整理、搜索和恢复你的 Prompt 库。</li>
+              <li>执行 AI 辅助分类和相关后端能力。</li>
+              <li>执行额度控制、防滥用、排查故障并改进稳定性。</li>
             </ul>
 
-            <h3>3. 数据如何存储</h3>
+            <h3>3. 默认不会收集什么</h3>
             <ul>
-              <li><b>本地存储</b>：默认将 Prompt 等数据保存在浏览器本地存储中。</li>
-              <li><b>加密</b>：如启用云同步，我们会对传输链路使用 HTTPS，并对服务端存储做加密处理。</li>
-              <li><b>云同步</b>：仅用于给你翻译与你的数据存储（如适用）。</li>
+              <li>不会收集你的完整浏览历史。</li>
+              <li>不会在没有用户操作的情况下，在后台读取任意页面内容。</li>
+              <li>不会直接收集你的完整支付卡信息，这部分由支付服务商处理。</li>
             </ul>
+            <p>但当你明确使用扩展去保存选中文本、分类 Prompt、或把 Prompt 插入到可编辑输入框时，扩展会读取完成该动作所必需的相关文本。</p>
 
-            <h3>4. 第三方服务</h3>
-            <p>为提供登录、同步与订阅支付等能力，我们可能会使用以下第三方服务（以你的实际产品集成为准）：</p>
+            <h3>4. 数据如何存储</h3>
             <ul>
-              <li><b>Google OAuth</b>：用于登录与身份认证。</li>
-              <li><b>Firebase / Supabase</b>：用于云同步、数据库与存储（如适用）。</li>
-              <li><b>Stripe / LemonSqueezy</b>：用于订阅与支付（如适用）。</li>
+              <li><b>默认本地存储</b>：Prompt 和界面状态优先保存在浏览器扩展本地存储中。</li>
+              <li><b>按需服务端存储</b>：账号、计费、同步和 AI 辅助能力可能需要把相关数据发送到我们的后端服务。</li>
+              <li><b>传输安全</b>：数据通过 HTTPS 传输。</li>
             </ul>
 
-            <h3>5. 数据共享与披露</h3>
+            <h3>5. 第三方服务</h3>
+            <p>为运行产品，我们可能使用以下服务提供方：</p>
+            <ul>
+              <li><b>Creem / Paddle</b>：用于订阅结账和计费管理。</li>
+              <li><b>基础设施与托管服务商</b>：用于网站与后端运行。</li>
+              <li><b>由后端配置的 AI 模型服务商</b>：用于 Prompt 分类或相关 AI 功能。</li>
+            </ul>
+
+            <h3>6. 数据共享与披露</h3>
             <ul>
               <li>我们不会出售你的个人数据。</li>
-              <li>仅在提供服务所必需、或满足法律要求的情况下，与服务提供方共享最小必要数据。</li>
+              <li>仅在提供服务、处理计费、运行 AI 辅助功能、履行法律义务、或防止欺诈与滥用所必需的范围内，共享最小必要数据。</li>
             </ul>
 
-            <h3>6. 你的权利与控制</h3>
+            <h3>7. 你的控制权</h3>
             <ul>
-              <li>你可以随时导出、删除你保存的 Prompt（如你的产品实现支持）。</li>
-              <li>你可以关闭云同步，或请求删除云端数据（如适用）。</li>
+              <li>你可以删除扩展本地保存的 Prompt。</li>
+              <li>你可以联系我们，请求删除与你账号绑定的云端数据。</li>
+              <li>你可以随时停止使用账号、计费或云端相关功能。</li>
             </ul>
 
-            <h3>7. 联系我们</h3>
-            <p>如你对本隐私政策有任何疑问或请求，请联系：<a href="mailto:support@yourdomain.com">support@yourdomain.com</a>。</p>
+            <h3>8. 联系我们</h3>
+            <p>如果你对本政策有疑问，或希望请求删除数据，请联系：<a href="mailto:ydjydn@gmail.com">ydjydn@gmail.com</a>。</p>
           </div>
         </div>
       </section>
@@ -198,14 +220,14 @@
             <a href="./index.html#features" data-i18n="common.nav.features">Features</a>
             <a href="./pricing.html" data-i18n="common.nav.pricing">Pricing</a>
             <a href="./docs/install.html" data-i18n="common.nav.docs">Docs</a>
-            <a href="https://chromewebstore.google.com/detail/ai-prompt-workspace/ipedofdipnhlelljcebgnjjohnjommdk" target="_blank" rel="noreferrer" data-i18n="common.nav.install">Install</a>
+            <a href="https://extension.nextself.top/downloads/ai-prompt-workspace-chrome-webstore.zip" download rel="noreferrer" data-i18n="common.nav.install">Install</a>
           </div>
           <div>
             <h4 data-i18n="common.footer.legal">Legal</h4>
             <a href="./terms.html">Terms</a>
             <a href="./privacy.html">Privacy</a>
             <a href="./refund.html">Refund</a>
-            <a href="mailto:support@yourdomain.com" data-i18n="common.footer.contact">Contact</a>
+            <a href="mailto:ydjydn@gmail.com" data-i18n="common.footer.contact">Contact</a>
           </div>
         </div>
         <div class="fineprint">
@@ -218,3 +240,4 @@
     </footer>
   </body>
 </html>
+
