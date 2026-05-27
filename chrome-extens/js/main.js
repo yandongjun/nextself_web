@@ -105,6 +105,8 @@
           q4: 'Is my data stored locally?',
           a4: 'By default, prompts are stored locally in your browser. See the privacy policy for details.',
         },
+        feedbackCta: 'Send feedback',
+        footerEmailLabel: 'Contact email:',
       },
       pricing: {
         title: 'Pricing — AI Prompt Workspace',
@@ -328,6 +330,8 @@
           q4: '数据是否本地存储？',
           a4: '默认优先本地存储。详细说明见隐私政策。',
         },
+        feedbackCta: '意见反馈',
+        footerEmailLabel: '联系邮箱：',
       },
       pricing: {
         title: '定价 — AI Prompt Workspace',
